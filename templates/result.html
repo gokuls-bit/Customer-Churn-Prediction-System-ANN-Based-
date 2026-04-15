@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result — ChurnSense AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="card result-card {{ 'churn-danger' if churn else 'churn-safe' }}">
+
+        <!-- Result Icon & Title -->
+        <div class="result-icon">
+            {% if churn %}
+                ⚠️
+            {% else %}
+                ✅
+            {% endif %}
+        </div>
+
+        <div class="result-title">
+            {% if churn %}
+                Customer Likely to Leave
+            {% else %}
+                Customer Likely to Stay
+            {% endif %}
+        </div>
+
+        <div class="result-subtitle">
+            Based on ANN model analysis with {{ accuracy }}% test accuracy
+        </div>
+
+        <!-- Probability Circle -->
+        <div class="prob-circle">
+            <span class="value">{{ probability }}%</span>
+            <span class="label">{% if churn %}Churn{% else %}Churn{% endif %} Prob.</span>
+        </div>
+
+        <!-- Customer Details Summary -->
+        <div class="detail-grid">
+            <div class="detail-item">
+                <span class="key">Credit Score</span>
+                <span class="val">{{ credit_score }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="key">Geography</span>
+                <span class="val">{{ geography }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="key">Gender</span>
+                <span class="val">{{ gender }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="key">Age</span>
+                <span class="val">{{ age }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="key">Tenure</span>
+                <span class="val">{{ tenure }} yrs</span>
+            </div>
+            <div class="detail-item">
+                <span class="key">Balance</span>
+                <span class="val">${{ "%.2f"|format(balance) }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="key">Products</span>
+                <span class="val">{{ num_products }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="key">Credit Card</span>
+                <span class="val">{{ has_cr_card }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="key">Active Member</span>
+                <span class="val">{{ is_active }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="key">Est. Salary</span>
+                <span class="val">${{ "%.2f"|format(estimated_salary) }}</span>
+            </div>
+        </div>
+
+        <!-- Confusion Matrix -->
+        <div class="cm-section">
+            <h3>📊 Model Confusion Matrix</h3>
+            <img src="{{ url_for('static', filename='confusion_matrix.png') }}" alt="Confusion Matrix">
+        </div>
+
+        <!-- Back Button -->
+        <a href="/" class="btn-back">← Predict Another Customer</a>
+    </div>
+
+    <div class="footer">
+        Developed with ❤️ by <span>Gokul Kumar Sant</span> · MM(DU) · Roll No: 11232629 · 6-G
+    </div>
+
+</body>
+</html>
