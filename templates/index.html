@@ -3,27 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI-powered bank customer churn prediction using Artificial Neural Networks. Enter customer data and get instant churn probability.">
+    <meta name="description" content="AI-powered bank customer churn prediction using Artificial Neural Networks.">
     <title>ChurnSense AI — Customer Churn Prediction</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <div class="card">
-        <h1>🏦 ChurnSense AI</h1>
-        <h2>Predict customer churn with Neural Networks</h2>
-
-        <div class="accuracy-badge">
-            ⚡ Model Accuracy: {{ accuracy }}%
+    <!-- Header -->
+    <div class="header">
+        <div class="header-badge">
+            <span class="dot"></span>
+            ANN Model Active
         </div>
+        <h1>ChurnSense AI</h1>
+        <h2>Bank Customer Churn Prediction System</h2>
+        <div class="accuracy-strip">
+            <span>Model Accuracy</span>
+            <span class="sep">·</span>
+            <span class="value">{{ accuracy }}%</span>
+            <span class="sep">·</span>
+            <span>ANN · TensorFlow</span>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="card">
 
         {% if error %}
-        <div class="error-alert">
-            ⚠️ {{ error }}
-        </div>
+        <div class="error-alert">⚠ {{ error }}</div>
         {% endif %}
+
+        <div class="section-title">Customer Profile Input</div>
 
         <form action="/predict" method="POST">
             <div class="form-grid">
@@ -88,7 +100,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="is_active">Is Active Member?</label>
+                    <label for="is_active">Active Member?</label>
                     <select id="is_active" name="is_active" required>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -104,13 +116,13 @@
             </div>
 
             <button type="submit" class="btn-predict">
-                🔍 Predict Churn
+                ▶ &nbsp; Run Churn Prediction
             </button>
         </form>
     </div>
 
     <div class="footer">
-        Developed with ❤️ by <span>Gokul Kumar Sant</span> · MM(DU) · Roll No: 11232629 · 6-G
+        Developed by <span>Gokul Kumar Sant</span> &nbsp;·&nbsp; MM(DU) &nbsp;·&nbsp; Roll: 11232629 &nbsp;·&nbsp; 6-G
     </div>
 
 </body>

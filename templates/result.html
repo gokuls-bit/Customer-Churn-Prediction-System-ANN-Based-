@@ -5,96 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Result — ChurnSense AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <div class="card result-card {{ 'churn-danger' if churn else 'churn-safe' }}">
+    <!-- Header -->
+    <div class="header">
+        <div class="header-badge">
+            <span class="dot"></span>
+            Prediction Complete
+        </div>
+        <h1>ChurnSense AI</h1>
+        <h2>Analysis Result</h2>
+    </div>
 
-        <!-- Result Icon & Title -->
-        <div class="result-icon">
-            {% if churn %}
-                ⚠️
-            {% else %}
-                ✅
-            {% endif %}
+    <!-- Result Card -->
+    <div class="card result-card">
+
+        <!-- Verdict Banner -->
+        <div class="verdict {{ 'danger' if churn else 'safe' }}">
+            <span class="verdict-icon">{{ '⚠' if churn else '✓' }}</span>
+            <div class="verdict-label">
+                {{ 'High Risk' if churn else 'Low Risk' }}
+            </div>
+            <div class="verdict-title">
+                {{ 'Customer Likely to Leave' if churn else 'Customer Likely to Stay' }}
+            </div>
+            <div class="prob-pill">
+                <span class="big">{{ probability }}%</span>
+                <span class="small">Churn Probability</span>
+            </div>
         </div>
 
-        <div class="result-title">
-            {% if churn %}
-                Customer Likely to Leave
-            {% else %}
-                Customer Likely to Stay
-            {% endif %}
-        </div>
+        <div class="chrome-divider"></div>
 
-        <div class="result-subtitle">
-            Based on ANN model analysis with {{ accuracy }}% test accuracy
-        </div>
+        <!-- Customer Profile -->
+        <div class="section-title">Customer Profile</div>
 
-        <!-- Probability Circle -->
-        <div class="prob-circle">
-            <span class="value">{{ probability }}%</span>
-            <span class="label">{% if churn %}Churn{% else %}Churn{% endif %} Prob.</span>
-        </div>
-
-        <!-- Customer Details Summary -->
-        <div class="detail-grid">
-            <div class="detail-item">
+        <div class="profile-grid">
+            <div class="profile-cell">
                 <span class="key">Credit Score</span>
                 <span class="val">{{ credit_score }}</span>
             </div>
-            <div class="detail-item">
+            <div class="profile-cell">
                 <span class="key">Geography</span>
                 <span class="val">{{ geography }}</span>
             </div>
-            <div class="detail-item">
+            <div class="profile-cell">
                 <span class="key">Gender</span>
                 <span class="val">{{ gender }}</span>
             </div>
-            <div class="detail-item">
+            <div class="profile-cell">
                 <span class="key">Age</span>
-                <span class="val">{{ age }}</span>
+                <span class="val">{{ age }} yrs</span>
             </div>
-            <div class="detail-item">
+            <div class="profile-cell">
                 <span class="key">Tenure</span>
                 <span class="val">{{ tenure }} yrs</span>
             </div>
-            <div class="detail-item">
+            <div class="profile-cell">
                 <span class="key">Balance</span>
-                <span class="val">${{ "%.2f"|format(balance) }}</span>
+                <span class="val">${{ "%.0f"|format(balance) }}</span>
             </div>
-            <div class="detail-item">
+            <div class="profile-cell">
                 <span class="key">Products</span>
                 <span class="val">{{ num_products }}</span>
             </div>
-            <div class="detail-item">
+            <div class="profile-cell">
                 <span class="key">Credit Card</span>
                 <span class="val">{{ has_cr_card }}</span>
             </div>
-            <div class="detail-item">
+            <div class="profile-cell">
                 <span class="key">Active Member</span>
                 <span class="val">{{ is_active }}</span>
             </div>
-            <div class="detail-item">
+            <div class="profile-cell">
                 <span class="key">Est. Salary</span>
-                <span class="val">${{ "%.2f"|format(estimated_salary) }}</span>
+                <span class="val">${{ "%.0f"|format(estimated_salary) }}</span>
             </div>
         </div>
 
+        <div class="chrome-divider"></div>
+
         <!-- Confusion Matrix -->
         <div class="cm-section">
-            <h3>📊 Model Confusion Matrix</h3>
+            <div class="section-title">Model Performance · Confusion Matrix · {{ accuracy }}% Accuracy</div>
             <img src="{{ url_for('static', filename='confusion_matrix.png') }}" alt="Confusion Matrix">
         </div>
 
         <!-- Back Button -->
-        <a href="/" class="btn-back">← Predict Another Customer</a>
+        <div style="text-align: center;">
+            <a href="/" class="btn-back">← New Prediction</a>
+        </div>
+
     </div>
 
     <div class="footer">
-        Developed with ❤️ by <span>Gokul Kumar Sant</span> · MM(DU) · Roll No: 11232629 · 6-G
+        Developed by <span>Gokul Kumar Sant</span> &nbsp;·&nbsp; MM(DU) &nbsp;·&nbsp; Roll: 11232629 &nbsp;·&nbsp; 6-G
     </div>
 
 </body>

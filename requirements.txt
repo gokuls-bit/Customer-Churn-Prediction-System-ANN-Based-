@@ -1,7 +1,8 @@
-streamlit
+streamlit>=1.30.0
 tensorflow==2.18.0
 numpy<2.0
 pandas
 scikit-learn
 matplotlib
 seaborn
+protobuf>=3.20,<5.0

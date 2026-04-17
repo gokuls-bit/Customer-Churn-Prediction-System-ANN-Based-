@@ -1,151 +1,280 @@
 /* ============================================================
-   Bank Customer Churn Prediction — Global Styles
+   ChurnSense AI — Metallic Black Theme
    Developed by Gokul Kumar Sant
    ============================================================ */
 
-/* --- Reset & Base --- */
-*,
-*::before,
-*::after {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* --- Reset --- */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ---- Root Tokens ---- */
+:root {
+    --bg-base:        #0a0a0a;
+    --bg-card:        #111111;
+    --bg-card-inner:  #181818;
+    --border-metal:   #2a2a2a;
+    --border-shine:   #3d3d3d;
+    --chrome-light:   #d4d4d4;
+    --chrome-mid:     #8a8a8a;
+    --chrome-dark:    #4a4a4a;
+    --accent-silver:  #c0c0c0;
+    --accent-blue:    #4f8aff;
+    --text-primary:   #e8e8e8;
+    --text-secondary: #7a7a7a;
+    --text-muted:     #4a4a4a;
+    --danger:         #ff4545;
+    --danger-bg:      #1a0808;
+    --danger-border:  #5a1515;
+    --success:        #2ecc71;
+    --success-bg:     #081a0e;
+    --success-border: #155a2a;
+    --shadow-card:    0 8px 40px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255,255,255,0.04) inset;
+    --shadow-btn:     0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* ---- Base ---- */
 body {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-base);
+    background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(60,60,60,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(40,40,40,0.1) 0%, transparent 60%);
+    color: var(--text-primary);
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-    color: #e2e8f0;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* --- Typography --- */
+/* ---- Header Bar ---- */
+.header {
+    width: 100%;
+    max-width: 720px;
+    padding: 36px 0 0;
+    text-align: center;
+}
+
+.header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #1c1c1c, #252525);
+    border: 1px solid var(--border-shine);
+    border-radius: 50px;
+    padding: 6px 18px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--chrome-mid);
+    margin-bottom: 20px;
+}
+
+.header-badge .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--success);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--success);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+}
+
 h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(180deg, var(--chrome-light) 0%, var(--chrome-mid) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 4px;
+    line-height: 1.1;
+    margin-bottom: 10px;
 }
 
 h2 {
-    font-size: 1.25rem;
+    font-size: 0.95rem;
     font-weight: 400;
-    color: #94a3b8;
-    margin-bottom: 28px;
+    color: var(--text-secondary);
+    margin-bottom: 0;
 }
 
-/* --- Card Container --- */
+/* ---- Accuracy Strip ---- */
+.accuracy-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 28px 0 0;
+    font-size: 0.8rem;
+    color: var(--chrome-mid);
+    letter-spacing: 0.5px;
+}
+
+.accuracy-strip .value {
+    font-weight: 700;
+    color: var(--chrome-light);
+    font-size: 0.9rem;
+}
+
+.accuracy-strip .sep {
+    color: var(--border-shine);
+}
+
+/* ---- Card ---- */
 .card {
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 40px 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-metal);
+    border-top: 1px solid var(--border-shine);
+    border-radius: 18px;
+    padding: 36px 32px;
     width: 100%;
-    max-width: 680px;
-    margin: 40px auto 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    max-width: 720px;
+    margin: 24px auto 0;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
 }
 
-/* --- Accuracy Badge --- */
-.accuracy-badge {
-    display: inline-block;
-    background: rgba(96, 165, 250, 0.15);
-    border: 1px solid rgba(96, 165, 250, 0.3);
-    color: #93c5fd;
-    padding: 6px 16px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 24px;
+/* Subtle top chrome line */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
 }
 
-/* --- Form Grid --- */
+/* ---- Section Title ---- */
+.section-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-metal);
+    padding-bottom: 12px;
+    margin-bottom: 22px;
+}
+
+/* ---- Form Grid ---- */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    gap: 16px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
+    gap: 6px;
 }
 
 .form-group label {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    color: #94a3b8;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
+    color: var(--chrome-dark);
 }
 
 .form-group input,
 .form-group select {
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border-metal);
     border-radius: 10px;
     padding: 12px 14px;
-    color: #f1f5f9;
-    font-size: 0.95rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
     outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .form-group input:focus,
 .form-group select:focus {
-    border-color: #60a5fa;
-    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+    border-color: var(--border-shine);
+    background: #1f1f1f;
+    box-shadow: 0 0 0 3px rgba(100,100,100,0.12);
+}
+
+.form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a4a4a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
 }
 
 .form-group select option {
-    background: #1e1b4b;
-    color: #f1f5f9;
+    background: #1a1a1a;
+    color: var(--text-primary);
 }
 
-/* --- Submit Button --- */
+/* ---- Submit Button ---- */
 .btn-predict {
     display: block;
     width: 100%;
-    margin-top: 28px;
-    padding: 14px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    color: #fff;
-    font-size: 1.05rem;
-    font-weight: 700;
-    border: none;
+    margin-top: 26px;
+    padding: 15px;
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    border: 1px solid #3a3a3a;
+    border-top-color: #4a4a4a;
     border-radius: 12px;
+    color: var(--chrome-light);
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
     cursor: pointer;
-    letter-spacing: 0.5px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-btn), 0 1px 0 rgba(255,255,255,0.05) inset;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-predict::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+    pointer-events: none;
 }
 
 .btn-predict:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    background: linear-gradient(180deg, #333 0%, #222 100%);
+    border-color: #555;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.06) inset;
+    color: #fff;
+    transform: translateY(-1px);
 }
 
 .btn-predict:active {
     transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
-/* --- Error Alert --- */
+/* ---- Error Alert ---- */
 .error-alert {
-    background: rgba(239, 68, 68, 0.15);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    color: #fca5a5;
-    padding: 12px 18px;
+    background: #130505;
+    border: 1px solid #3d1010;
+    color: #ff7070;
+    padding: 12px 16px;
     border-radius: 10px;
-    margin-bottom: 18px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
 }
 
 /* ============================================================
@@ -154,167 +283,181 @@ h2 {
 
 .result-card {
     text-align: center;
-    padding: 48px 36px;
 }
 
-.result-icon {
-    font-size: 3.5rem;
-    margin-bottom: 12px;
+/* Divider chrome line */
+.chrome-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-shine), transparent);
+    margin: 28px 0;
 }
 
-.result-title {
-    font-size: 1.6rem;
+/* ---- Verdict Banner ---- */
+.verdict {
+    padding: 28px 24px;
+    border-radius: 14px;
+    margin-bottom: 28px;
+}
+
+.verdict.danger {
+    background: var(--danger-bg);
+    border: 1px solid var(--danger-border);
+}
+
+.verdict.safe {
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
+}
+
+.verdict-icon {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.verdict-label {
+    font-size: 0.68rem;
     font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.result-subtitle {
-    font-size: 1rem;
-    color: #94a3b8;
-    margin-bottom: 24px;
-}
-
-/* Probability circle */
-.prob-circle {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 28px;
-    font-weight: 700;
-}
-
-.prob-circle .value {
-    font-size: 2.2rem;
-    line-height: 1;
-}
-
-.prob-circle .label {
-    font-size: 0.75rem;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-    opacity: 0.8;
+    margin-bottom: 6px;
 }
 
-/* Churn = danger */
-.churn-danger .result-title {
-    color: #f87171;
-}
+.verdict.danger .verdict-label { color: var(--danger); }
+.verdict.safe  .verdict-label { color: var(--success); }
 
-.churn-danger .prob-circle {
-    background: rgba(239, 68, 68, 0.12);
-    border: 3px solid #ef4444;
-    color: #f87171;
-}
-
-/* Churn = safe */
-.churn-safe .result-title {
-    color: #4ade80;
-}
-
-.churn-safe .prob-circle {
-    background: rgba(34, 197, 94, 0.12);
-    border: 3px solid #22c55e;
-    color: #4ade80;
-}
-
-/* Customer details grid */
-.detail-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    text-align: left;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 24px;
-}
-
-.detail-item {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    padding: 4px 0;
-}
-
-.detail-item .key {
-    color: #64748b;
-}
-
-.detail-item .val {
-    color: #e2e8f0;
-    font-weight: 600;
-}
-
-/* Confusion Matrix section */
-.cm-section {
-    margin-top: 28px;
-    text-align: center;
-}
-
-.cm-section h3 {
-    font-size: 1rem;
-    color: #94a3b8;
-    margin-bottom: 12px;
-    font-weight: 600;
-}
-
-.cm-section img {
-    max-width: 100%;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* --- Back Button --- */
-.btn-back {
-    display: inline-block;
-    margin-top: 24px;
-    padding: 12px 32px;
-    background: rgba(255, 255, 255, 0.08);
-    color: #e2e8f0;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: background 0.2s ease;
-}
-
-.btn-back:hover {
-    background: rgba(255, 255, 255, 0.14);
-}
-
-/* --- Footer --- */
-.footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.8rem;
-    color: #475569;
-    margin-top: auto;
+.verdict-title {
+    font-size: 1.5rem;
+    font-weight: 800;
     margin-bottom: 16px;
 }
 
+.verdict.danger .verdict-title { color: #ff6b6b; }
+.verdict.safe  .verdict-title  { color: #4ade80; }
+
+/* Probability Pill */
+.prob-pill {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 50px;
+    padding: 10px 24px;
+}
+
+.prob-pill .big {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.verdict.danger .prob-pill .big { color: var(--danger); }
+.verdict.safe  .prob-pill .big  { color: var(--success); }
+
+.prob-pill .small {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* ---- Customer Profile Table ---- */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border-metal);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-metal);
+    text-align: left;
+}
+
+.profile-cell {
+    background: var(--bg-card-inner);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-cell .key {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+}
+
+.profile-cell .val {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--chrome-light);
+}
+
+/* ---- Confusion Matrix ---- */
+.cm-section {
+    margin-top: 28px;
+}
+
+.cm-section .section-title {
+    text-align: left;
+}
+
+.cm-section img {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 12px;
+    border: 1px solid var(--border-metal);
+    display: block;
+    margin: 0 auto;
+    filter: brightness(0.95) contrast(1.1);
+}
+
+/* ---- Back Button ---- */
+.btn-back {
+    display: inline-block;
+    margin-top: 26px;
+    padding: 12px 32px;
+    background: linear-gradient(180deg, #222, #161616);
+    border: 1px solid var(--border-shine);
+    border-radius: 10px;
+    color: var(--chrome-mid);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.btn-back:hover {
+    background: linear-gradient(180deg, #2c2c2c, #1e1e1e);
+    color: var(--chrome-light);
+    border-color: #555;
+}
+
+/* ---- Footer ---- */
+.footer {
+    width: 100%;
+    max-width: 720px;
+    text-align: center;
+    padding: 28px 0 32px;
+    margin-top: auto;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-metal);
+    margin-top: 32px;
+}
+
 .footer span {
-    color: #94a3b8;
+    color: var(--chrome-dark);
     font-weight: 600;
 }
 
-/* --- Responsive --- */
-@media (max-width: 600px) {
-    .card {
-        margin: 20px 16px;
-        padding: 28px 20px;
-    }
-
-    .form-grid,
-    .detail-grid {
-        grid-template-columns: 1fr;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
+/* ---- Responsive ---- */
+@media (max-width: 620px) {
+    .card { margin: 16px 12px; padding: 24px 18px; }
+    .form-grid, .profile-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 1.6rem; }
 }
