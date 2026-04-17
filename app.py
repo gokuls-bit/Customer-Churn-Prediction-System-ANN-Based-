@@ -198,27 +198,31 @@ def load_pipeline():
         if os.path.exists(H5):
             try:
                 model = load_model(H5)
-            except Exception as e:
-                st.warning(f"Error loading saved model: {e}. Retraining...")
+            except Exception:
+                # Version mismatch detected (e.g. model saved in 2.18, loading in 2.15)
                 model = None
         else:
             model = None
 
         if model is None:
-            model = Sequential([
-                Dense(128, activation='relu', input_shape=(X_train.shape[1],)),
-                Dropout(0.2),
-                Dense(64, activation='relu'),
-                Dense(1, activation='sigmoid')
-            ])
-            model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-            model.fit(
-                X_train, y_train,
-                validation_split=0.2, batch_size=32, epochs=60,
-                callbacks=[EarlyStopping(monitor='val_loss', patience=8, restore_best_weights=True)],
-                verbose=0
-            )
-            model.save(H5)
+            with st.status("🛠️ Optimizing model for current environment...", expanded=False) as status:
+                model = Sequential([
+                    Dense(128, activation='relu', input_dim=X_train.shape[1]),
+                    Dropout(0.2),
+                    Dense(64, activation='relu'),
+                    Dense(1, activation='sigmoid')
+                ])
+                model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+                st.write("Training neural layers...")
+                model.fit(
+                    X_train, y_train,
+                    validation_split=0.2, batch_size=32, epochs=60,
+                    callbacks=[EarlyStopping(monitor='val_loss', patience=8, restore_best_weights=True)],
+                    verbose=0
+                )
+                st.write("Saving optimized model...")
+                model.save(H5)
+                status.update(label="✅ Optimization Complete", state="complete")
 
         # --- Statistics ---
         y_pred = (model.predict(X_test, verbose=0) > 0.5)
